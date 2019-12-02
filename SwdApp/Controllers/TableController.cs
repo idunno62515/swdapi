@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SwdApp.Data.Dtos;
+using SwdApp.Data.Dtos.Table;
 using SwdApp.Data.Implementations;
-using SwdApp.ViewModels;
 
 namespace SwdApp.Controllers
 {
@@ -17,17 +12,16 @@ namespace SwdApp.Controllers
     {
         private readonly ITableService tableService;
 
-        public TableController(ITableService tableService)
+        public TableController(ITableService tableService, string name)
         {
             this.tableService = tableService;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<TableViewModel>> GetTable()
+        public async Task<IEnumerable<TableDto>> GetTable()
         {
-            var res = await tableService.GetAllTable();
-
-            return res.Adapt<IEnumerable<TableViewModel>>();
+            var listTable = await tableService.GetAllTable();
+            return listTable;
         }
     }
 }

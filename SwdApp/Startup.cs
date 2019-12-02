@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using EasyCaching.Core.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SwdApp.Data.Implementation;
 using SwdApp.Data.Implementations;
 using SwdApp.Data.Interfaces;
 
@@ -27,7 +29,26 @@ namespace SwdApp {
             services.AddControllers();
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
             var config = builder.Build();
+
+            //service
             services.AddTransient<ITableService>(x => new TableService(config["ConnectionString:SwdCore"]));
+            services.AddTransient<ICategoryService>(x => new CategoryService(config["ConnectionString:SwdCore"]));
+
+
+            //caching
+            services.AddEasyCaching(option =>
+            {
+                option.UseRedis(redisConfig =>
+                {
+                    redisConfig.DBConfig.Endpoints.Add(new ServerEndPoint("localhost", 6379));
+
+                    redisConfig.DBConfig.AllowAdmin = true;
+
+                }, "redis1");
+
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

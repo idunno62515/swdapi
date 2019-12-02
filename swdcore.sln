@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwdApp", "SwdApp\SwdApp.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwdApp.Data", "SwdApp.Data\SwdApp.Data.csproj", "{00D6B6F7-70F7-48C9-9F40-2F0997E9E425}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "proc", "proc", "{54432913-C45B-4C10-9CC2-9996013EFCDD}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DB", "DB\DB.sqlproj", "{8838ED35-345F-40EE-8FAB-08079F9E987C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +23,12 @@ Global
 		{00D6B6F7-70F7-48C9-9F40-2F0997E9E425}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00D6B6F7-70F7-48C9-9F40-2F0997E9E425}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00D6B6F7-70F7-48C9-9F40-2F0997E9E425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8838ED35-345F-40EE-8FAB-08079F9E987C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8838ED35-345F-40EE-8FAB-08079F9E987C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8838ED35-345F-40EE-8FAB-08079F9E987C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8838ED35-345F-40EE-8FAB-08079F9E987C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8838ED35-345F-40EE-8FAB-08079F9E987C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8838ED35-345F-40EE-8FAB-08079F9E987C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
