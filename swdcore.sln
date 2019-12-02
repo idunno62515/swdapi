@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwdApp", "SwdApp\SwdApp.csproj", "{97AB8F8D-F89F-4799-9CF8-FA9F3F22AE00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwdApp", "SwdApp\SwdApp.csproj", "{97AB8F8D-F89F-4799-9CF8-FA9F3F22AE00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwdApp.Data", "SwdApp.Data\SwdApp.Data.csproj", "{00D6B6F7-70F7-48C9-9F40-2F0997E9E425}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwdApp.Data", "SwdApp.Data\SwdApp.Data.csproj", "{00D6B6F7-70F7-48C9-9F40-2F0997E9E425}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "proc", "proc", "{54432913-C45B-4C10-9CC2-9996013EFCDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
