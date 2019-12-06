@@ -6,7 +6,10 @@ namespace SwdApp.Data.Interfaces
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<CategoryDto>> GetAllCate();
+        Task<IEnumerable<CategoryDto>> GetCatesWithProductsByMasterCateId(int masterCateId);
         Task<IEnumerable<MasterCategoryDto>> GetAllMasterCate();
+
+        
+
     }
 }

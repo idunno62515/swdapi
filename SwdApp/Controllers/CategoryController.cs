@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SwdApp.Data.Dtos.Category;
 using SwdApp.Data.Interfaces;
@@ -6,7 +8,7 @@ using SwdApp.Data.Interfaces;
 
 namespace SwdApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -18,9 +20,16 @@ namespace SwdApp.Controllers
         }
 
         [HttpGet("MasterCategory")]
-        public Task<MasterCategoryDto> GetMasterCategory()
+        public async Task<IEnumerable<MasterCategoryDto>> GetMasterCategory()
         {
-            return null;
+            return await categoryService.GetAllMasterCate();
+        }
+
+        [HttpGet("{masterCateId}")]
+        public async Task<IEnumerable<CategoryDto>> GetCatesWithProductsByMasterCateId(int masterCateId)
+        
+        {
+            return await categoryService.GetCatesWithProductsByMasterCateId(masterCateId);
         }
 
         

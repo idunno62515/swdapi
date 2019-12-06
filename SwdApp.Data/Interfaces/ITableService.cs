@@ -7,5 +7,6 @@ namespace SwdApp.Data.Implementations
     public interface ITableService
     {
         Task<IEnumerable<TableDto>> GetAllTable();
+        Task<IEnumerable<ListTableDisplayByFloorDto>> GetListTableDisplayByFloor();
     }
 }

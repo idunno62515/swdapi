@@ -19,13 +19,41 @@ namespace SwdApp.Data.Interfaces
             this._connectionString = connectionString;
         }
 
+
+        public async Task<IEnumerable<ListTableDisplayByFloorDto>> GetListTableDisplayByFloor()
+        {
+            IEnumerable<ListTableDisplayByFloorDto> list = null;
+            var floorDic = new Dictionary<int, ListTableDisplayByFloorDto>();
+            using (var con = new SqlConnection(_connectionString))
+            {
+                list = await con.QueryAsync<ListTableDisplayByFloorDto, TableDto, ListTableDisplayByFloorDto>(
+                    "spTableGetListByFloor",
+                    (tableDisplayByFloor, table) =>
+                    {
+                        ListTableDisplayByFloorDto listTableEntry = null;
+                        if (!floorDic.TryGetValue(tableDisplayByFloor.FloorNum, out listTableEntry))
+                        {
+                            listTableEntry = tableDisplayByFloor;
+                            listTableEntry.Tables = new List<TableDto>();
+                            floorDic.Add(listTableEntry.FloorNum, listTableEntry);
+                        }
+
+                        listTableEntry.Tables.Add(table);
+                        return listTableEntry;
+                    },
+                     splitOn: "Id",
+                     commandType: CommandType.StoredProcedure);
+            }
+            return floorDic.Values;
+        }
+
         public async Task<IEnumerable<TableDto>> GetAllTable()
         {
             IEnumerable<TableDto> tables = null;
-            using(var con = new SqlConnection(_connectionString))
+            using (var con = new SqlConnection(_connectionString))
             {
-                tables =await con.QueryAsync<TableDto>(
-                    SroteProcedureName.spGetAllTable, 
+                tables = await con.QueryAsync<TableDto>(
+                    "spTableGetAll",
                     commandType: CommandType.StoredProcedure
                     );
             }

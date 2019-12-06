@@ -33,6 +33,7 @@ namespace SwdApp {
             //service
             services.AddTransient<ITableService>(x => new TableService(config["ConnectionString:SwdCore"]));
             services.AddTransient<ICategoryService>(x => new CategoryService(config["ConnectionString:SwdCore"]));
+            services.AddTransient<IProductService>(x => new ProductService(config["ConnectionString:SwdCore"]));
 
 
             //caching

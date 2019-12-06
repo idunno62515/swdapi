@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SwdApp.Data.Dtos.Product;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SwdApp.Data.Dtos.Category { 
@@ -7,10 +9,12 @@ namespace SwdApp.Data.Dtos.Category {
     {
         public int Id { get; set; }
 
-        public int Code { get; set; }
+        public int CateCode { get; set; }
 
         public string Name { get; set; }
 
-        public string ShortName { get; set; }
+        public string CateShortName { get; set; }
+
+        public List<ProductDto> Products { get; set; }
     }
 }
