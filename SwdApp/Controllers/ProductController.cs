@@ -20,10 +20,18 @@ namespace SwdApp.Controllers
             this.productService = productService;
         }
 
-        [HttpGet("~/api/categories/{cateId}/products")]
-        public async Task<IEnumerable<ProductDto>> GetProductByCate(int cateId)
+        //[HttpGet("~/api/categories/{cateId}/products")]
+        //public async Task<IEnumerable<ProductDto>> GetProductByCate(int cateId)
+        //{
+        //    return await productService.GetProductByCate(cateId);
+        //}
+
+        [HttpGet()]
+        public async Task<IEnumerable<ProductDto>> GetProductByCate([FromQuery(Name ="cate")]int cate)
         {
-            return await productService.GetProductByCate(cateId);
+            return await productService.GetProductByCate(cate);
         }
+
+
     }
 }

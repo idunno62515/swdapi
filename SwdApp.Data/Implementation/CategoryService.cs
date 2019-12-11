@@ -57,7 +57,7 @@ namespace SwdApp.Data.Implementation
             using (var con = new SqlConnection(connectionString))
             {
                 list = await con.QueryAsync<MasterCategoryDto>(
-                    "spCateGetCateAndProductByMasterCateId",
+                    "spMasterCategoryGetAll",
                     commandType: CommandType.StoredProcedure
                     );
             }

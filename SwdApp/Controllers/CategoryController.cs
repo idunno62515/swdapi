@@ -19,14 +19,18 @@ namespace SwdApp.Controllers
             this.categoryService = categoryService;
         }
 
-        [HttpGet("MasterCategory")]
+
+        [HttpGet("~/api/master-categories")]
         public async Task<IEnumerable<MasterCategoryDto>> GetMasterCategory()
         {
             return await categoryService.GetAllMasterCate();
         }
 
-        [HttpGet("{masterCateId}")]
-        public async Task<IEnumerable<CategoryDto>> GetCatesWithProductsByMasterCateId(int masterCateId)
+        [HttpGet()]
+        public async Task<IEnumerable<CategoryDto>> GetCatesWithProductsByMasterCateId
+            (
+                [FromQuery(Name = "mastercate")]int masterCateId
+            )
         
         {
             return await categoryService.GetCatesWithProductsByMasterCateId(masterCateId);
