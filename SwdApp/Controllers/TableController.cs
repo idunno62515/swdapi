@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SwdApp.Data.Dtos.Table;
 using SwdApp.Data.Implementations;
@@ -8,6 +11,7 @@ namespace SwdApp.Controllers
 {
     [Route("api/tables")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TableController : ControllerBase
     {
         private readonly ITableService tableService;
