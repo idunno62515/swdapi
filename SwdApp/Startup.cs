@@ -74,6 +74,10 @@ namespace SwdApp
             services.AddTransient<ITableService>(x => new TableService(config["ConnectionString:SwdCore"]));
             services.AddTransient<ICategoryService>(x => new CategoryService(config["ConnectionString:SwdCore"]));
             services.AddTransient<IProductService>(x => new ProductService(config["ConnectionString:SwdCore"]));
+            services.AddTransient<IOrderService>(x => new OrderService(config["ConnectionString:SwdCore"]));
+            services.AddTransient<IAccountService>(x => new AccountService(config["ConnectionString:SwdCore"]));
+
+
 
 
             //caching

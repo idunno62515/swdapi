@@ -11,7 +11,7 @@ namespace SwdApp.Controllers
 {
     [Route("api/tables")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TableController : ControllerBase
     {
         private readonly ITableService tableService;
