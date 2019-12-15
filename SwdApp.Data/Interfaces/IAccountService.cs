@@ -5,7 +5,7 @@ namespace SwdApp.Data.Implementation
 {
     public interface IAccountService
     {
-        public Task<string> Login(LoginDto loginDto);
+        public Task<bool> Login(LoginDto loginDto);
 
     }
 }

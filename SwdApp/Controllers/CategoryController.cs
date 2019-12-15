@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SwdApp.Data.Dtos.Category;
 using SwdApp.Data.Interfaces;
@@ -10,6 +12,7 @@ namespace SwdApp.Controllers
 {
     [Route("api/categories")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService categoryService;

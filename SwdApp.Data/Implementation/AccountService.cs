@@ -1,6 +1,9 @@
-﻿using SwdApp.Data.Dtos.Account;
+﻿using Dapper;
+using SwdApp.Data.Dtos.Account;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +18,20 @@ namespace SwdApp.Data.Implementation
             this.connectionString = connectionString;
         }
 
-        public Task<string> Login(LoginDto loginDto)
+        public async Task<bool> Login(LoginDto loginDto)
         {
-            throw new NotImplementedException();
+            using (var con = new SqlConnection(connectionString))
+            {
+                var res = await con.QueryFirstOrDefaultAsync<int>(
+                    "spAccountLogin",
+                    new { Username = loginDto.Username, Password = loginDto.Password },
+                    commandType: CommandType.StoredProcedure);
+
+                return res > 0;
+
+            }
         }
+
+      
     }
 }

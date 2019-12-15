@@ -9,5 +9,7 @@ namespace SwdApp.Data.Interfaces
     public interface IOrderService
     {
         public Task<bool> SubmitOrder(OrderDto order);
+        public Task<OrderDto> GetOrderByTable(int tableId);
+        public Task<bool> ChangeOrderStatus(int id);
     }
 }

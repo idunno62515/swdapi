@@ -51,6 +51,9 @@ namespace SwdApp.Data.Implementation
             return cateDictionary.Values;
         }
 
+
+
+
         public async Task<IEnumerable<MasterCategoryDto>> GetAllMasterCate()
         {
             IEnumerable<MasterCategoryDto> list = null;

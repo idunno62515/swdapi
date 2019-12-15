@@ -20,13 +20,51 @@ namespace SwdApp.Data.Implementation
             this.connecionString = connecionString;
         }
 
+        public async Task<OrderDto> GetOrderByTable(int tableId)
+        {
+
+            var order = new OrderDto();
+            using (var con = new SqlConnection(connecionString))
+            using 
+                (
+                    var result = (await con.QueryMultipleAsync(
+                        "spOrderGetByTable",
+                        new { tableId = tableId },
+                        commandType: CommandType.StoredProcedure))
+                )
+            {
+                var orderId = result.Read<int>().FirstOrDefault();
+                var listOrderDetail = result.Read<OrderDetailDto>().DefaultIfEmpty();
+                order.OrderId = orderId;
+                order.Details = listOrderDetail;
+
+            }
+
+            return order;
+        }
+
+        public async Task<bool> ChangeOrderStatus(int id)
+        {
+            using (var con = new SqlConnection(connecionString))
+            {
+                var par = new DynamicParameters();
+                par.Add("@id", id, DbType.Int32, direction: ParameterDirection.Input);
+                par.Add("@ReturnValue", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+
+                await con.ExecuteAsync(
+                    "spOrderUpdateStatus",
+                    par,
+                    commandType: CommandType.StoredProcedure
+                    );
+                return par.Get<int>("@ReturnValue") == 1;
+            }
+        }
+
         public async Task<bool> SubmitOrder(OrderDto order)
         {
             using (var con = new SqlConnection(connecionString))
             {
                 var tableDetail = GetDataTableDetail(order.Details);
-                var table = new DataTable { Columns = { { "id", typeof(int) } }, Rows = { { 1 }, { 2 }, { 3 } } };
-
                 var param = new DynamicParameters();
 
                 param.Add("@TotalAmount", order.TotalAmount, dbType: DbType.Double, direction: ParameterDirection.Input);
@@ -35,7 +73,7 @@ namespace SwdApp.Data.Implementation
                 param.Add("@DetailList", tableDetail.AsTableValuedParameter(), direction: ParameterDirection.Input);
                 param.Add("@ReturnValue", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
 
-                var res = await con.ExecuteAsync(
+                await con.ExecuteAsync(
                     "spOrderInsert",
                     param,
                     commandType: CommandType.StoredProcedure
@@ -58,18 +96,6 @@ namespace SwdApp.Data.Implementation
             tableDetail.Columns.Add("Notes", typeof(string));
             tableDetail.Columns.Add("UnitPrice", typeof(double));
 
-            //details.ToList().ForEach(x => tableDetail.Rows.Add(
-            //        x.ProductId,
-            //        x.ProductCode,
-            //        x.ProductName,
-            //        x.TotalAmount,
-            //        x.Quantity,
-            //        x.Notes,
-            //        x.UnitPrice
-            //    ));
-
-
-
             foreach (var item in details)
             {
 
@@ -84,10 +110,10 @@ namespace SwdApp.Data.Implementation
                             item.UnitPrice
                     });
             }
-
-
             return tableDetail;
 
         }
+
+      
     }
 }

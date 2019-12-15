@@ -6,6 +6,7 @@ namespace SwdApp.Data.Dtos.Order
 {
     public class OrderDto
     {
+        public int OrderId { get; set; }
         public double TotalAmount { get; set; }
         public int? TableId { get; set; }
         public string ServedPerson { get; set; }

@@ -12,7 +12,11 @@ namespace SwdApp.Data.Dtos.Order
         public double TotalAmount { get; set; }
         public int Quantity { get; set; }
         public string Notes { get; set; }
+
+        public int Status { get; set; }
+
         public double UnitPrice { get; set; }
+
 
     }
 }
