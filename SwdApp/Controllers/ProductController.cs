@@ -35,6 +35,12 @@ namespace SwdApp.Controllers
             return await productService.GetProductByCate(cate);
         }
 
+        [HttpGet("search")]
+        public async Task<IEnumerable<ProductDto>> GetProductByName([FromQuery(Name = "name")]string name)
+        {
+            return await productService.getProductByname(name);
+        }
+
 
     }
 }

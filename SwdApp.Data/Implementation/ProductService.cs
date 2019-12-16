@@ -22,14 +22,14 @@ namespace SwdApp.Data.Implementation
         public async Task<IEnumerable<ProductDto>> GetProductByCate(int cateId)
         {
             IEnumerable<ProductDto> list = null;
-            using(var con = new SqlConnection(connectionString))
+            using (var con = new SqlConnection(connectionString))
             {
                 list = await con.QueryAsync<ProductDto>(
-                    "spProductGetByCate", 
-                    new { CateId = cateId }, 
+                    "spProductGetByCate",
+                    new { CateId = cateId },
                     commandType: CommandType.StoredProcedure
                     );
-                
+
             }
             return list;
         }
@@ -37,6 +37,22 @@ namespace SwdApp.Data.Implementation
         public Task<IEnumerable<ProductDto>> GetProductById(int proId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<ProductDto>> getProductByname(string name = "")
+        {
+            IEnumerable<ProductDto> list = null;
+
+            using (var con = new SqlConnection(connectionString))
+            {
+                list = await con.QueryAsync<ProductDto>(
+                    "spProductGetByName",
+                    new { Name = name },
+                    commandType: CommandType.StoredProcedure
+                    );
+
+            }
+            return list;
         }
     }
 }

@@ -10,7 +10,6 @@ namespace SwdApp.Data.Interfaces
     {
         Task<IEnumerable<ProductDto>> GetProductByCate(int cateId);
         Task<IEnumerable<ProductDto>> GetProductById(int proId);
-
-
+        Task<IEnumerable<ProductDto>> getProductByname(string name);
     }
 }
