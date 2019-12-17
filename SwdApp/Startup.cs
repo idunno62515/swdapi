@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using SwdApp.Hubs;
 
 namespace SwdApp
 {
@@ -128,6 +129,8 @@ namespace SwdApp
                     });
             });
 
+            services.AddSignalR();
+
 
         }
 
@@ -167,7 +170,9 @@ namespace SwdApp
             //});
 
 
-            app.UseHttpsRedirection();
+            //disable for signalR
+
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -177,6 +182,12 @@ namespace SwdApp
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<TestHub>("/testhub");
+            });
+
         }
     }
 }

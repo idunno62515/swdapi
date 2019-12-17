@@ -8,9 +8,9 @@ namespace SwdApp.Hubs
 {
     public class TestHub : Hub
     {
-        public async Task MsgFromServer(int id)
+        public async Task Send(int id, int status)
         {
-            await Clients.All.SendAsync("UpdateTableStatus", id);
+            await Clients.All.SendAsync("UpdateTable", id, status);
         }
     }
 }
